@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Say No To Drugs - Awareness Campaign</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#ff0000", secondary: "#1a1a1a" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      overflow-x: hidden;
+      }
+      .glitch {
+      position: relative;
+      animation: glitch 2s infinite;
+      }
+      @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+      }
+      .smoke-text {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      }
+      .smoke-text:hover  {
+      animation: nosmoke 2s forwards;
+      }
+      /* .smoke-text:first-child:hover .smoke-text:last-child{
+        animation: nosmoke 2s forwards;
+      }*/
+
+      @keyframes nosmoke {
+      0% { opacity: 0; transform: scale(1); filter: blur(10px); }
+      100% { opacity: 1; transform: scale(1.5); filter: blur(0); }
+      } 
+
+
+      @keyframes smoke {
+      0% { opacity: 1; transform: scale(1); filter: blur(0); }
+      100% { opacity: 0; transform: scale(1.5); filter: blur(10px); }
+      }
+      .pulsing {
+      animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+      0% { text-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+      50% { text-shadow: 0 0 20px rgba(255, 0, 0, 0.8); }
+      100% { text-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+      }
+      .floating {
+      animation: float 6s ease-in-out infinite;
+      }
+      @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+      }
+      .shake:hover {
+      animation: shake 0.5s;
+      }
+      @keyframes shake {
+      0% { transform: translate(0); }
+      20% { transform: translate(-5px, 5px); }
+      40% { transform: translate(-5px, -5px); }
+      60% { transform: translate(5px, 5px); }
+      80% { transform: translate(5px, -5px); }
+      100% { transform: translate(0); }
+      }
+      .before-after-slider {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 400px;
+      }
+      .before-image, .after-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 0.3s ease;
+      }
+      .before-image {
+      z-index: 1;
+      }
+      .slider-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ff0000;
+      left: 50%;
+      z-index: 3;
+      cursor: ew-resize;
+      }
+      .slider-button {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ff0000;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+      cursor: ew-resize;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      }
+      .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      }
+      .particle {
+      position: absolute;
+      background: rgba(255, 0, 0, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      }
+      .smoke-effect {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 100;
+      }
+      .counter {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #ff0000;
+      }
+      input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      background: #1a1a1a;
+      border-radius: 5px;
+      outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #ff0000;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+      }
+      .timeline-dot {
+      width: 20px;
+      height: 20px;
+      background-color: #ff0000;
+      border-radius: 50%;
+      position: relative;
+      }
+      .timeline-dot::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background-color: #ff0000;
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%);
+      }
+      .timeline-dot:last-child::after {
+      display: none;
+      }
+      .testimonial {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .testimonial:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+      }
+      .help-button {
+      position: relative;
+      overflow: hidden;
+      }
+      .help-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+      }
+      .help-button:hover::before {
+      left: 100%;
+      }
+      .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+      }
+      .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="smoke-effect" id="smokeCanvas"></div>
+    <header
+      class="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style="background-image: url('/drugsbanner.avif'); background-size: cover; background-position: center;"
+    >
+      <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+      <div class="relative z-10 text-center px-4">
+        <h1
+          class="glitch text-6xl md:text-8xl font-bold mb-8 tracking-wider relative"
+          style="font-family: 'Creepster', cursive;"
+        >
+          <span
+            class="smoke-text text-red-500 pulsing absolute inset-0"
+            style="transition: all 0.5s ease;"
+            >SAY NO TO DRUGS</span
+          >
+          <span
+            class="smoke-text pulsing absolute inset-0"
+            style="color:white; opacity: 0; transition: all 0.5s ease; transform: scale(1);"
+            >SAY YES TO LIFE</span
+          >
+        </h1>
+        <style>
+          .glitch {
+          min-height: 120px;
+          }
+          .glitch:hover .smoke-text:first-child {
+          opacity: 0;
+          transform: scale(1.5);
+          filter: blur(10px);
+          }
+          .glitch:hover .smoke-text:last-child {
+          opacity: 1;
+          }
+        </style>
+        <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-80 mb-12">
+          The path to destruction is paved with false promises. Witness the
+          horrifying reality of addiction.
+        </p>
+        <a
+          href="#learn-more"
+          class="inline-block bg-primary text-white px-8 py-4 text-lg font-bold tracking-wide shake !rounded-button hover:bg-opacity-80 transition-all"
+          >WITNESS THE HORROR</a
+        >
+      </div>
+      <div
+        class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+      >
+        <i class="ri-arrow-down-line ri-2x text-white"></i>
+      </div>
+    </header>
+    <section id="learn-more" class="py-20 relative overflow-hidden">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center glitch">
+          THE TERRIFYING <span class="text-primary">TRUTH</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+          <div class="fade-in">
+            <h3 class="text-3xl font-bold mb-6 text-primary">
+              Your Body <span class="text-white">Deteriorates</span>
+            </h3>
+            <p class="text-lg mb-6 opacity-80">
+              Drugs don't just alter your mind—they ravage your body from the
+              inside out. Users experience rapid aging, tooth decay, skin
+              lesions, and organ failure.
+            </p>
+            <p class="text-lg mb-6 opacity-80">
+              What starts as recreational use quickly transforms into a
+              nightmare of physical deterioration that becomes impossible to
+              hide.
+            </p>
+            <div class="flex items-center space-x-4 mb-6">
+              <div class="timeline-dot"></div>
+              <div>
+                <p class="font-bold">First Use</p>
+                <p class="opacity-70 text-sm">The beginning of the end</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4 mb-6">
+              <div class="timeline-dot"></div>
+              <div>
+                <p class="font-bold">3 Months</p>
+                <p class="opacity-70 text-sm">
+                  Visible weight loss, skin problems
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4 mb-6">
+              <div class="timeline-dot"></div>
+              <div>
+                <p class="font-bold">1 Year</p>
+                <p class="opacity-70 text-sm">
+                  Severe dental issues, premature aging
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="timeline-dot"></div>
+              <div>
+                <p class="font-bold">5 Years</p>
+                <p class="opacity-70 text-sm">
+                  Organ failure, irreversible damage
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="before-after-slider fade-in" id="beforeAfterSlider">
+            <div
+              class="before-image"
+              style="background-image: url('https://readdy.ai/api/search-image?query=healthy%2520young%2520person%2520with%2520clear%2520skin%252C%2520bright%2520eyes%252C%2520and%2520a%2520genuine%2520smile%252C%2520looking%2520vibrant%2520and%2520full%2520of%2520life%252C%2520professional%2520portrait%2520photography%2520with%2520soft%2520lighting%2520against%2520a%2520neutral%2520background&width=600&height=400&seq=2&orientation=landscape'); opacity: 1;"
+            ></div>
+            <div
+              class="after-image"
+              style="background-image: url('https://readdy.ai/api/search-image?query=same%2520person%2520now%2520looking%2520severely%2520emaciated%2520with%2520hollow%2520cheeks%252C%2520dark%2520circles%2520under%2520bloodshot%2520eyes%252C%2520decaying%2520teeth%252C%2520open%2520sores%2520on%2520face%252C%2520aged%2520beyond%2520recognition%252C%2520haunting%2520portrait%2520with%2520harsh%2520lighting%2520showing%2520extreme%2520deterioration&width=600&height=400&seq=3&orientation=landscape'); opacity: 0;"
+            ></div>
+            <div class="slider-handle" id="sliderHandle">
+              <div class="slider-button">
+                <i class="ri-arrow-left-right-line"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+          <div
+            class="order-2 md:order-1 before-after-slider fade-in"
+            id="beforeAfterSlider2"
+          >
+            <div
+              class="before-image"
+              style="background-image: url('https://readdy.ai/api/search-image?query=happy%2520family%2520gathering%2520with%2520multiple%2520generations%2520smiling%2520together%252C%2520warm%2520lighting%252C%2520comfortable%2520home%2520setting%252C%2520feeling%2520of%2520connection%2520and%2520love%252C%2520professional%2520family%2520portrait%2520style&width=600&height=400&seq=4&orientation=landscape'); opacity: 1;"
+            ></div>
+            <div
+              class="after-image"
+              style="background-image: url('https://readdy.ai/api/search-image?query=empty%2520chairs%2520at%2520a%2520family%2520table%2520with%2520one%2520isolated%2520person%2520sitting%2520alone%2520in%2520shadows%252C%2520abandoned%2520home%2520with%2520dark%2520lighting%252C%2520broken%2520picture%2520frames%252C%2520atmosphere%2520of%2520complete%2520isolation%2520and%2520loss%252C%2520cinematic%2520composition&width=600&height=400&seq=5&orientation=landscape'); opacity: 0;"
+            ></div>
+            <div class="slider-handle" id="sliderHandle2">
+              <div class="slider-button">
+                <i class="ri-arrow-left-right-line"></i>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 md:order-2 fade-in">
+            <h3 class="text-3xl font-bold mb-6 text-primary">
+              Your Relationships <span class="text-white">Shatter</span>
+            </h3>
+            <p class="text-lg mb-6 opacity-80">
+              Addiction doesn't just destroy your body—it obliterates every
+              meaningful connection in your life. Family members become
+              strangers. Friends disappear. Children are taken away.
+            </p>
+            <p class="text-lg mb-6 opacity-80">
+              The isolation becomes as painful as the physical symptoms, leaving
+              you utterly alone with your addiction.
+            </p>
+            <div
+              class="bg-secondary bg-opacity-30 p-6 !rounded-lg border-l-4 border-primary mb-6"
+            >
+              <p class="italic opacity-80">
+                "I lost my wife, my kids, my job, my home. Everyone I loved gave
+                up on me. By the time I wanted help, there was no one left to
+                call."
+              </p>
+              <p class="text-sm mt-2 text-primary">
+                — Raman Kartha, 42, recovering addict
+              </p>
+            </div>
+            <div
+              class="bg-secondary bg-opacity-30 p-6 !rounded-lg border-l-4 border-primary"
+            >
+              <p class="italic opacity-80">
+                "I watched my brother transform from someone I admired to
+                someone I feared. Drugs didn't just take his life—they stole him
+                from us years before he died."
+              </p>
+              <p class="text-sm mt-2 text-primary">
+                — Angel Sara, 35, lost her brother to overdose
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="fade-in">
+          <h3 class="text-3xl font-bold mb-10 text-center">
+            The <span class="text-primary">Horrifying</span> Statistics
+          </h3>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
+          >
+            <div
+              class="bg-black bg-opacity-50 p-8 !rounded-lg border border-primary border-opacity-30 text-center shake"
+            >
+              <div class="counter mb-4" data-target="67890">0</div>
+              <p class="text-lg opacity-80">Drug overdose deaths in 2024</p>
+            </div>
+            <div
+              class="bg-black bg-opacity-50 p-8 !rounded-lg border border-primary border-opacity-30 text-center shake"
+            >
+              <div class="counter mb-4" data-target="23">0</div>
+              <p class="text-lg opacity-80">Years of life lost on average</p>
+            </div>
+            <div
+              class="bg-black bg-opacity-50 p-8 !rounded-lg border border-primary border-opacity-30 text-center shake"
+            >
+              <div class="counter mb-4" data-target="78">0</div>
+              <p class="text-lg opacity-80">
+                Percentage who lose their families
+              </p>
+            </div>
+            <div
+              class="bg-black bg-opacity-50 p-8 !rounded-lg border border-primary border-opacity-30 text-center shake"
+            >
+              <div class="counter mb-4" data-target="92">0</div>
+              <p class="text-lg opacity-80">Percentage who regret starting</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="py-20 relative"
+      style="background-image: url('https://readdy.ai/api/search-image?query=dark%2520hallway%2520with%2520shadowy%2520figures%2520and%2520red%2520emergency%2520lighting%252C%2520creating%2520a%2520sense%2520of%2520dread%2520and%2520isolation%252C%2520cinematic%2520horror%2520atmosphere%2520with%2520fog%2520effects%252C%2520high%2520contrast%2520lighting&width=1920&height=600&seq=6&orientation=landscape'); background-size: cover; background-position: center;"
+    >
+      <div class="absolute inset-0 bg-black bg-opacity-80"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center glitch">
+          HEAR THEIR <span class="text-primary">NIGHTMARES</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            class="testimonial bg-black bg-opacity-70 p-8 !rounded-lg border border-primary border-opacity-30 fade-in"
+          >
+            <div
+              class="w-20 h-20 flex items-center justify-center bg-primary bg-opacity-20 !rounded-full mb-6"
+            >
+              <i class="ri-ghost-line ri-2x text-primary"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-4">Ananthu TD, 21</h4>
+            <p class="opacity-80 mb-6">
+              "I started with just weekend use. Within a year, I was homeless,
+              stealing from my own mother to get a fix. I've been clean for 2
+              years, but I still have nightmares about what I became."
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center !rounded-full bg-primary bg-opacity-20 mr-4"
+              >
+                <i class="ri-play-fill text-primary"></i>
+              </div>
+              <div>
+                <p class="text-sm opacity-70">Listen to full story</p>
+                <div class="w-32 h-2 bg-gray-700 !rounded-full mt-1">
+                  <div class="w-1/4 h-full bg-primary !rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="testimonial bg-black bg-opacity-70 p-8 !rounded-lg border border-primary border-opacity-30 fade-in"
+          >
+            <div
+              class="w-20 h-20 flex items-center justify-center bg-primary bg-opacity-20 !rounded-full mb-6"
+            >
+              <i class="ri-ghost-line ri-2x text-primary"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-4">Amal Nath, 34</h4>
+            <p class="opacity-80 mb-6">
+              "I lost custody of my children. The look in their eyes when they
+              were taken away... I'll never forget it. They didn't understand
+              why mommy chose drugs over them. Neither did I."
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center !rounded-full bg-primary bg-opacity-20 mr-4"
+              >
+                <i class="ri-play-fill text-primary"></i>
+              </div>
+              <div>
+                <p class="text-sm opacity-70">Listen to full story</p>
+                <div class="w-32 h-2 bg-gray-700 !rounded-full mt-1">
+                  <div class="w-1/3 h-full bg-primary !rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="testimonial bg-black bg-opacity-70 p-8 !rounded-lg border border-primary border-opacity-30 fade-in"
+          >
+            <div
+              class="w-20 h-20 flex items-center justify-center bg-primary bg-opacity-20 !rounded-full mb-6"
+            >
+              <i class="ri-ghost-line ri-2x text-primary"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-4">Thamban, 42</h4>
+            <p class="opacity-80 mb-6">
+              "I was a successful architect. Now I'm missing half my teeth, my
+              liver is failing, and I can't hold a pencil steady enough to draw.
+              One pill at a party cost me everything."
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center !rounded-full bg-primary bg-opacity-20 mr-4"
+              >
+                <i class="ri-play-fill text-primary"></i>
+              </div>
+              <div>
+                <p class="text-sm opacity-70">Listen to full story</p>
+                <div class="w-32 h-2 bg-gray-700 !rounded-full mt-1">
+                  <div class="w-1/2 h-full bg-primary !rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center glitch">
+          HOW ADDICTION <span class="text-primary">DESTROYS</span> YOUR BRAIN
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+          <div class="fade-in">
+            <h3 class="text-3xl font-bold mb-6">
+              Your Mind <span class="text-primary">Betrays</span> You
+            </h3>
+            <p class="text-lg mb-6 opacity-80">
+              Drugs rewire your brain's reward system, creating an unnatural
+              dependency that overrides your survival instincts. Your brain
+              becomes a prison of your own making.
+            </p>
+            <div class="mb-8">
+              <h4 class="text-xl font-bold mb-4">Cognitive Decline Timeline</h4>
+              <div class="w-full bg-gray-800 h-2 !rounded-full mb-6">
+                <div
+                  class="bg-primary h-full !rounded-full"
+                  style="width: 75%"
+                ></div>
+              </div>
+              <div class="grid grid-cols-4 gap-4 text-center text-sm">
+                <div>
+                  <p class="font-bold">Stage 1</p>
+                  <p class="opacity-70">Euphoria</p>
+                </div>
+                <div>
+                  <p class="font-bold">Stage 2</p>
+                  <p class="opacity-70">Dependency</p>
+                </div>
+                <div>
+                  <p class="font-bold">Stage 3</p>
+                  <p class="opacity-70">Paranoia</p>
+                </div>
+                <div>
+                  <p class="font-bold">Stage 4</p>
+                  <p class="opacity-70">Psychosis</p>
+                </div>
+              </div>
+            </div>
+            <div class="mb-6">
+              <h4 class="text-xl font-bold mb-4">Experience the Decline</h4>
+              <p class="text-sm mb-2">
+                Drag to simulate cognitive deterioration:
+              </p>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                class="slider"
+                id="cognitionSlider"
+              />
+            </div>
+            <div
+              id="cognitionText"
+              class="p-6 bg-black !rounded-lg border border-primary border-opacity-30"
+            >
+              <p class="text-lg">
+                I feel completely normal and in control of my thoughts and
+                actions.
+              </p>
+            </div>
+          </div>
+          <div class="fade-in relative">
+            <div id="brainChart" class="w-full h-96"></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          <div
+            class="bg-black p-8 !rounded-lg border border-primary border-opacity-30 fade-in shake"
+          >
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-20 !rounded-full mb-6"
+            >
+              <i class="ri-mental-health-line ri-2x text-primary"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-4">Permanent Damage</h4>
+            <p class="opacity-80">
+              Even after recovery, many brain functions never return to normal.
+              Memory loss, reduced cognitive abilities, and emotional regulation
+              issues can persist for life.
+            </p>
+          </div>
+          <div
+            class="bg-black p-8 !rounded-lg border border-primary border-opacity-30 fade-in shake"
+          >
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-20 !rounded-full mb-6"
+            >
+              <i class="ri-psychotherapy-line ri-2x text-primary"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-4">Hallucinations</h4>
+            <p class="opacity-80">
+              Many users experience terrifying hallucinations—seeing insects
+              crawling under their skin, hearing threatening voices, and feeling
+              constant paranoia that never fully disappears.
+            </p>
+          </div>
+          <div
+            class="bg-black p-8 !rounded-lg border border-primary border-opacity-30 fade-in shake"
+          >
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-20 !rounded-full mb-6"
+            >
+              <i class="ri-emotion-sad-line ri-2x text-primary"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-4">Emotional Death</h4>
+            <p class="opacity-80">
+              Long-term drug use destroys your ability to feel natural pleasure.
+              Activities and relationships that once brought joy become empty
+              and meaningless, leading to profound depression.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- <section
+      class="py-20 bg-black relative"
+      style="background-image: url('https://readdy.ai/api/search-image?query=dark%2520abstract%2520background%2520with%2520subtle%2520red%2520smoke%2520or%2520blood-like%2520tendrils%2520creating%2520an%2520ominous%2520pattern%252C%2520minimalist%2520horror%2520aesthetic%252C%2520high%2520contrast%2520with%2520deep%2520blacks&width=1920&height=600&seq=7&orientation=landscape'); background-size: cover; background-position: center;"
+    >
+      <div class="absolute inset-0 bg-black bg-opacity-80"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold mb-8 glitch">
+            YOU <span class="text-primary">STILL</span> HAVE A CHOICE
+          </h2>
+          <p class="text-xl opacity-80">
+            Unlike those trapped in addiction, you can still walk away. Make the
+            right choice now, before it's too late.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          <div class="fade-in">
+            <h3 class="text-2xl font-bold mb-6 text-primary">
+              Emergency Hotlines
+            </h3>
+            <div
+              class="bg-black bg-opacity-70 p-6 !rounded-lg border border-primary border-opacity-30 mb-6"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 flex items-center justify-center !rounded-full bg-primary bg-opacity-20 mr-4"
+                >
+                  <i class="ri-phone-fill text-primary"></i>
+                </div>
+                <div>
+                  <p class="font-bold">National Helpline</p>
+                  <p class="text-primary">100 HELP (4357)</p>
+                </div>
+              </div>
+              <p class="text-sm opacity-80">
+                24/7 treatment referral and information service for individuals
+                and families facing mental health or substance use disorders.
+              </p>
+            </div>
+            <div
+              class="bg-black bg-opacity-70 p-6 !rounded-lg border border-primary border-opacity-30 mb-6"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 flex items-center justify-center !rounded-full bg-primary bg-opacity-20 mr-4"
+                >
+                  <i class="ri-message-3-fill text-primary"></i>
+                </div>
+                <div>
+                  <p class="font-bold">Crisis Text Line</p>
+                  <p class="text-primary">Text HOME to 741741</p>
+                </div>
+              </div>
+              <p class="text-sm opacity-80">
+                Free 24/7 support for those in crisis. Text from anywhere in the
+                USA to connect with a trained Crisis Counselor.
+              </p>
+            </div>
+            <div
+              class="bg-black bg-opacity-70 p-6 !rounded-lg border border-primary border-opacity-30"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 flex items-center justify-center !rounded-full bg-primary bg-opacity-20 mr-4"
+                >
+                  <i class="ri-team-fill text-primary"></i>
+                </div>
+                <div>
+                  <p class="font-bold">Family Support</p>
+                  <p class="text-primary">1-800-784-6776</p>
+                </div>
+              </div>
+              <p class="text-sm opacity-80">
+                Support for family members of individuals struggling with
+                addiction. Get guidance on how to help your loved one.
+              </p>
+            </div>
+          </div>
+          <div class="fade-in">
+            <h3 class="text-2xl font-bold mb-6 text-primary">
+              Find Help Near You
+            </h3>
+            <div
+              class="bg-black bg-opacity-70 p-6 !rounded-lg border border-primary border-opacity-30 mb-6"
+            >
+              <div
+                class="relative w-full h-64 mb-6"
+                style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;"
+              ></div>
+              <div class="mb-4">
+                <label for="location" class="block text-sm font-medium mb-2"
+                  >Enter your location</label
+                >
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="location"
+                    class="w-full bg-gray-900 border-none !rounded-lg p-3 pl-10 focus:ring-2 focus:ring-primary"
+                    placeholder="City or ZIP code"
+                  />
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <i class="ri-map-pin-line text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="w-full bg-primary text-white py-3 font-bold !rounded-button hover:bg-opacity-80 transition-all"
+              >
+                FIND TREATMENT CENTERS
+              </button>
+            </div>
+            <a
+              href="#"
+              class="help-button block text-center bg-white text-primary py-4 font-bold text-xl !rounded-button hover:bg-opacity-90 transition-all pulsing"
+            >
+              GET HELP NOW
+            </a>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <footer class="py-12 bg-black relative">
+      <div class="container mx-auto px-4">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center mb-8"
+        >
+          <p class="text-lg mb-4 md:mb-0">© 2025 Drug Awareness Campaign</p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-white hover:text-primary transition-colors">
+              <i class="ri-facebook-fill ri-lg"></i>
+            </a>
+            <a href="#" class="text-white hover:text-primary transition-colors">
+              <i class="ri-twitter-x-fill ri-lg"></i>
+            </a>
+            <a href="#" class="text-white hover:text-primary transition-colors">
+              <i class="ri-instagram-fill ri-lg"></i>
+            </a>
+            <a href="#" class="text-white hover:text-primary transition-colors">
+              <i class="ri-youtube-fill ri-lg"></i>
+            </a>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h4 class="text-lg font-bold mb-4">About</h4>
+            <ul class="space-y-2 opacity-70">
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Our Mission</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Team</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Partners</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-4">Resources</h4>
+            <ul class="space-y-2 opacity-70">
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Treatment Options</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Recovery Stories</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Educational Materials</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Research</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-4">Get Involved</h4>
+            <ul class="space-y-2 opacity-70">
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Volunteer</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Donate</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Spread Awareness</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Community Events</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-4">Emergency</h4>
+            <ul class="space-y-2 opacity-70">
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Overdose Response</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Crisis Intervention</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >Family Support</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition-colors"
+                  >24/7 Helplines</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-800 mt-8 pt-8 text-center text-sm opacity-70"
+        >
+          <p>
+            Join the Kerala Police in our mission to create a drug-free society. Together, we can protect our communities and build a healthier future for our children.
+          </p>
+          <p class="mt-2">
+            © 2025 Kerala Police. All rights reserved. | Say No To Drugs Campaign
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Before-After Slider 1
+        const sliderHandle = document.getElementById("sliderHandle");
+        const beforeAfterSlider = document.getElementById("beforeAfterSlider");
+        const beforeImage = beforeAfterSlider.querySelector(".before-image");
+        const afterImage = beforeAfterSlider.querySelector(".after-image");
+        let isDragging = false;
+        sliderHandle.addEventListener("mousedown", function (e) {
+          isDragging = true;
+          e.preventDefault();
+        });
+        document.addEventListener("mouseup", function () {
+          isDragging = false;
+        });
+        beforeAfterSlider.addEventListener("mousemove", function (e) {
+          if (!isDragging) return;
+          const rect = beforeAfterSlider.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+          sliderHandle.style.left = `${percent}%`;
+          beforeImage.style.opacity = (100 - percent) / 100;
+          afterImage.style.opacity = percent / 100;
+        });
+        // Before-After Slider 2
+        const sliderHandle2 = document.getElementById("sliderHandle2");
+        const beforeAfterSlider2 = document.getElementById("beforeAfterSlider2");
+        const beforeImage2 = beforeAfterSlider2.querySelector(".before-image");
+        const afterImage2 = beforeAfterSlider2.querySelector(".after-image");
+        let isDragging2 = false;
+        sliderHandle2.addEventListener("mousedown", function (e) {
+          isDragging2 = true;
+          e.preventDefault();
+        });
+        document.addEventListener("mouseup", function () {
+          isDragging2 = false;
+        });
+        beforeAfterSlider2.addEventListener("mousemove", function (e) {
+          if (!isDragging2) return;
+          const rect = beforeAfterSlider2.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+          sliderHandle2.style.left = `${percent}%`;
+          beforeImage2.style.opacity = (100 - percent) / 100;
+          afterImage2.style.opacity = percent / 100;
+        });
+        // Counter Animation
+        const counters = document.querySelectorAll(".counter");
+        counters.forEach((counter) => {
+          const target = +counter.getAttribute("data-target");
+          const duration = 2000; // ms
+          const step = target / (duration / 16); // 60fps
+          let current = 0;
+          const updateCounter = () => {
+            current += step;
+            if (current < target) {
+              counter.innerText = Math.floor(current);
+              requestAnimationFrame(updateCounter);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+              updateCounter();
+              observer.disconnect();
+            }
+          });
+          observer.observe(counter);
+        });
+        // Cognition Slider
+        const cognitionSlider = document.getElementById("cognitionSlider");
+        const cognitionText = document.getElementById("cognitionText");
+        const cognitionStages = [
+          "I feel completely normal and in control of my thoughts and actions.",
+          "I'm starting to need more to feel the same effects. Sometimes I think about using when I should be focusing on other things.",
+          "I can't concentrate without it. My thoughts are scattered and I'm constantly anxious when I can't use.",
+          "I'm seeing things that aren't there. Everyone is watching me. They know what I've done. They're coming for me. I need to hide.",
+          "The voices won't stop. There are insects under my skin. I need to get them out. WHY WON'T ANYONE HELP ME?",
+        ];
+        cognitionSlider.addEventListener("input", function () {
+          const value = this.value;
+          const stageIndex = Math.floor(value / 25);
+          const stage = Math.min(stageIndex, cognitionStages.length - 1);
+          cognitionText.innerHTML = `<p class="text-lg">${cognitionStages[stage]}</p>`;
+          // Add visual effects based on stage
+          cognitionText.style.filter = `blur(${stage * 0.5}px)`;
+          cognitionText.style.transform = `scale(${1 + stage * 0.05})`;
+          if (stage >= 3) {
+            cognitionText.classList.add("glitch");
+          } else {
+            cognitionText.classList.remove("glitch");
+          }
+          if (stage >= 4) {
+            cognitionText.style.color = "#ff0000";
+            cognitionText.style.fontWeight = "bold";
+          } else {
+            cognitionText.style.color = "";
+            cognitionText.style.fontWeight = "";
+          }
+        });
+        // Brain Activity Chart
+        const brainChart = echarts.init(document.getElementById("brainChart"));
+        const option = {
+          animation: false,
+          title: {
+            text: "Brain Activity During Addiction",
+            left: "center",
+            textStyle: {
+              color: "#ffffff",
+            },
+          },
+          tooltip: {
+            trigger: "axis",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            textStyle: {
+              color: "#000",
+            },
+          },
+          legend: {
+            data: ["Dopamine Response", "Cognitive Function", "Emotional Regulation"],
+            bottom: 0,
+            textStyle: {
+              color: "#ffffff",
+            },
+          },
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "15%",
+            top: "15%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "category",
+            data: [
+              "Healthy",
+              "First Use",
+              "Regular Use",
+              "Dependency",
+              "Addiction",
+              "Long-term",
+            ],
+            axisLine: {
+              lineStyle: {
+                color: "#ffffff",
+              },
+            },
+            axisLabel: {
+              color: "#ffffff",
+            },
+          },
+          yAxis: {
+            type: "value",
+            name: "Brain Function (%)",
+            min: 0,
+            max: 100,
+            axisLine: {
+              lineStyle: {
+                color: "#ffffff",
+              },
+            },
+            axisLabel: {
+              color: "#ffffff",
+            },
+            splitLine: {
+              lineStyle: {
+                color: "rgba(255, 255, 255, 0.1)",
+              },
+            },
+          },
+          series: [
+            {
+              name: "Dopamine Response",
+              type: "line",
+              data: [50, 95, 75, 60, 40, 20],
+              smooth: true,
+              lineStyle: {
+                width: 4,
+                color: "rgba(87, 181, 231, 1)",
+              },
+              itemStyle: {
+                color: "rgba(87, 181, 231, 1)",
+              },
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: "rgba(87, 181, 231, 0.3)" },
+                  { offset: 1, color: "rgba(87, 181, 231, 0.1)" },
+                ]),
+              },
+              showSymbol: false,
+            },
+            {
+              name: "Cognitive Function",
+              type: "line",
+              data: [90, 85, 70, 50, 30, 15],
+              smooth: true,
+              lineStyle: {
+                width: 4,
+                color: "rgba(141, 211, 199, 1)",
+              },
+              itemStyle: {
+                color: "rgba(141, 211, 199, 1)",
+              },
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: "rgba(141, 211, 199, 0.3)" },
+                  { offset: 1, color: "rgba(141, 211, 199, 0.1)" },
+                ]),
+              },
+              showSymbol: false,
+            },
+            {
+              name: "Emotional Regulation",
+              type: "line",
+              data: [85, 80, 60, 40, 20, 10],
+              smooth: true,
+              lineStyle: {
+                width: 4,
+                color: "rgba(251, 191, 114, 1)",
+              },
+              itemStyle: {
+                color: "rgba(251, 191, 114, 1)",
+              },
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: "rgba(251, 191, 114, 0.3)" },
+                  { offset: 1, color: "rgba(251, 191, 114, 0.1)" },
+                ]),
+              },
+              showSymbol: false,
+            },
+          ],
+        };
+        brainChart.setOption(option);
+        window.addEventListener("resize", function () {
+          brainChart.resize();
+        });
+        // Fade-in animations
+        const fadeElements = document.querySelectorAll(".fade-in");
+        const fadeObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                fadeObserver.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+          },
+        );
+        fadeElements.forEach((element) => {
+          fadeObserver.observe(element);
+        });
+        // Smoke effect on mouse move
+        const smokeCanvas = document.getElementById("smokeCanvas");
+        const particles = [];
+        const maxParticles = 50;
+        document.addEventListener("mousemove", function (e) {
+          createParticle(e.clientX, e.clientY);
+        });
+        function createParticle(x, y) {
+          if (particles.length >= maxParticles) {
+            particles.shift();
+          }
+          const particle = document.createElement("div");
+          particle.className = "particle";
+          particle.style.left = x + "px";
+          particle.style.top = y + "px";
+          const size = Math.random() * 20 + 10;
+          particle.style.width = size + "px";
+          particle.style.height = size + "px";
+          const hue = Math.random() * 30;
+          particle.style.backgroundColor = `rgba(${255}, ${hue}, ${hue}, ${Math.random() * 0.3 + 0.1})`;
+          smokeCanvas.appendChild(particle);
+          particles.push(particle);
+          animateParticle(particle);
+        }
+        function animateParticle(particle) {
+          let opacity = 0.5;
+          let size = parseFloat(particle.style.width);
+          let posX = parseFloat(particle.style.left);
+          let posY = parseFloat(particle.style.top);
+          let velX = Math.random() * 2 - 1;
+          let velY = Math.random() * -2 - 1;
+          const animate = () => {
+            if (opacity <= 0) {
+              particle.remove();
+              return;
+            }
+            opacity -= 0.01;
+            size += 0.5;
+            posX += velX;
+            posY += velY;
+            particle.style.opacity = opacity;
+            particle.style.width = size + "px";
+            particle.style.height = size + "px";
+            particle.style.left = posX + "px";
+            particle.style.top = posY + "px";
+            requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+        }
+      });
+    </script>
+  </body>
+</html>
